@@ -76,7 +76,7 @@ export default {
   },
 
   env: {
-    paramsUrl: {
+    defaultParams: {
       api_key: "7a6c316575389afeedb5d6c5dd145032",
       language: "pt-BR"
     },

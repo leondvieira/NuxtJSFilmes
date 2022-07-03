@@ -1,15 +1,9 @@
 <template>
-    <div>
-        <b-card-group class="content" deck>
-            <b-card 
-            v-for="movie in movies" 
-            :key="movie.id" 
-            overlay img-src="https://picsum.photos/250/250/?image=3" 
-            img-alt="Card Image" text-variant="white"                
-            :title="movie.title" sub-title="Subtitle">
-                <b-card-text>
-                   {{ movie.overview }}
-                </b-card-text>
+    <div class="mt-3 mb-3">
+        <b-card-group columns>
+            <b-card v-for="movie in movies" :key="movie.id" text-variant="black" :header="movie.title"
+                class="text-center">
+                <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
             </b-card>
         </b-card-group>
     </div>
@@ -23,16 +17,29 @@ export default {
             movies: []
         }
     },
+    props:{
+        endpoint:{
+            type: String,
+            required: true,
+        },
+        filterBy: {
+            type: Array,
+            required: false,
+        },
+        params: {
+            type: Object,
+            required: false
+        }
+    },
     methods: {
         async getMovies(){
-
-            let url = "/movie/latest?api_key=7a6c316575389afeedb5d6c5dd145032&language=pt-BR"
-
-            await this.$axios.$get(url).then((response) => {
-                this.movies = [...this.movies, response]
-            })
-
-            console.log(this.movies)
+            if (this.endpoint != '' || this.endpoint != false){
+                let defaultParams = process.env.defaultParams
+                await this.$axios.$get(this.endpoint, { params: defaultParams }).then((response) => {
+                    this.movies = response.results.slice(0, 9)
+                })
+            }
+            
         }
     },
     beforeMount(){
@@ -42,8 +49,4 @@ export default {
 </script>
 
 <style>
-.content{
-    display: flex;
-    width: 100%;
-}
 </style>

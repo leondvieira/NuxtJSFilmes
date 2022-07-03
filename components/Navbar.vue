@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar class="navbar" toggleable="lg" type="dark">
       <b-navbar-brand to="/">Filmes Legais</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -9,13 +9,9 @@
         <b-navbar-nav>
           <b-nav-item to="/secret">Secret</b-nav-item>
         </b-navbar-nav>
-
         <b-navbar-nav class="ml-auto">
-          <b-nav-form class="mr-2">
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-          </b-nav-form>
-
+          <b-button squared style="background-color: #004166;" @click="search">Pesquisar
+          </b-button>
           <b-nav-item-dropdown v-if="loggedIn" right>
             <template #button-content>
               <em>User</em>
@@ -37,18 +33,23 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      loggedIn: false
+      loggedIn: false,
+      currentUrl: "",
     }
   },
   mounted () {
     this.isLoggedIn()
   },
+  
   methods: {
     logout () {
       this.$fire.auth.signOut().then(() => {
         this.$router.push('/')
         this.isLoggedIn = false
       })
+    },
+    search(){
+      this.$router.push('/search')
     },
     isLoggedIn () {
       this.$fire.auth.onAuthStateChanged((user) => {
@@ -64,4 +65,7 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+  background-color: #004166;;
+}
 </style>
