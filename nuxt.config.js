@@ -39,7 +39,9 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/firebase'
   ],
-
+  bootstrapVue: {
+    icons: true
+  },
   firebase: {
     config: {
       apiKey: 'AIzaSyDQdYf8APZn7-ugHJUW0y7KtaaYhvVG-QU',
@@ -78,7 +80,8 @@ export default {
   env: {
     defaultParams: {
       api_key: "7a6c316575389afeedb5d6c5dd145032",
-      language: "pt-BR"
+      language: "pt-BR",
+      adult: false
     },
   },
 }

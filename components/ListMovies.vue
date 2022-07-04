@@ -2,8 +2,22 @@
     <div class="mt-3 mb-3">
         <b-card-group columns>
             <b-card v-for="movie in movies" :key="movie.id" text-variant="black" :header="movie.title"
-                class="text-center">
-                <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+                :img-src="getMovieIMG(movie)" class="text-center">
+                <b-card-text class="overview-text">
+                    <div>
+                        <b-icon-star class="star">
+                        </b-icon-star>
+                        {{ movie.vote_average }}
+                    </div>
+                    <div>
+                        <b-icon-calendar2-check variant="success"></b-icon-calendar2-check>
+                        {{ movie.release_date }}
+                    </div>
+                    <div class="overview">
+                        {{movie.overview}}
+
+                    </div>
+                </b-card-text>
             </b-card>
         </b-card-group>
     </div>
@@ -29,6 +43,10 @@ export default {
         params: {
             type: Object,
             required: false
+        },
+        pagination:{
+            type: Number,
+            required: true,
         }
     },
     methods: {
@@ -36,11 +54,13 @@ export default {
             if (this.endpoint != '' || this.endpoint != false){
                 let defaultParams = process.env.defaultParams
                 await this.$axios.$get(this.endpoint, { params: defaultParams }).then((response) => {
-                    this.movies = response.results.slice(0, 9)
+                    this.movies = response.results.slice(0, this.pagination)
                 })
             }
-            
-        }
+        },
+        getMovieIMG(movie) {
+            return `http://image.tmdb.org/t/p/original${movie.poster_path}`
+        },
     },
     beforeMount(){
         this.getMovies()
@@ -48,5 +68,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.star{
+    color: rgb(221, 188, 2);
+}
+.overview{
+    word-break: break-word;
+    overflow: hidden;
+    height: 9em;
+}
 </style>

@@ -1,23 +1,31 @@
 <template>
     <div>
         <div class="pt-3" style="display: flex">
-            <b-input v-model="input" placeholder="Search movies"></b-input>
-            <b-button v-if="query == ''" @click="searchMovies" class="ml-3" variant="success">
-                Pesquisar
+            <b-input v-model="input" @keyup.enter="searchMovies" placeholder="Search movies"></b-input>
+            <b-button v-if="query == ''" @click="searchMovies" class="ml-2" variant="success">
+                <b-icon-search>
+                </b-icon-search>
             </b-button>
-            <b-button v-else @click="clear" class="ml-3" variant="danger">
-                Limpar
+            <b-button v-else @click="clearInput" class="ml-2" variant="danger">
+                <b-icon-arrow-counterclockwise>
+                </b-icon-arrow-counterclockwise>
             </b-button>
         </div>
-        <list-movies v-if="query" :endpoint="query" />
+        <list-movies v-if="query" :endpoint="query" :pagination="15" />
     </div>
 </template>
 
 <script>
 import ListMovies from '@/components/ListMovies'
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
-  components: { ListMovies },
+    components: {
+        ListMovies, BootstrapVue,BootstrapVueIcons
+    },
     name: 'SearchMovies',
     data() {
         return {
@@ -29,7 +37,7 @@ export default {
         searchMovies(){
             this.query = "/search/movie/?query=" + this.input
         },
-        clear(){
+        clearInput(){
             this.query = '';
             this.input = '';
         }
@@ -37,6 +45,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

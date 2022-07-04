@@ -1,6 +1,10 @@
 <template>
     <b-container fluid class="search-content">
-        <search-movies style="height: 100%"/>
+        <search-movies style="height: 100%" />
+        <b-button @click="goToPreviusRoute" variant="info" size="lg" class="mr-2 my-3">
+            <b-icon-arrow-left>
+            </b-icon-arrow-left>
+        </b-button>
     </b-container>
 </template>
 
