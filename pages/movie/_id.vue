@@ -1,19 +1,23 @@
 .<template>
-    <div>
-        <h1>OLÁ</h1>
-    </div>
+    <b-container fluid class="movie-info">
+        <movie :id="parseInt($route.params.id)" />
+    </b-container>
+
 </template>
 
 <script>
-export default {
-    setup () {
-        
+import Movie from "@/components/Movie";
 
-        return {}
+export default {
+    components:{
+        movie: Movie
     }
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.movie-info {
+    background-color: #007bc4;
+    min-height: 100vh;
+}
 </style>

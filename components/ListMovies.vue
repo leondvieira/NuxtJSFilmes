@@ -2,7 +2,7 @@
     <div class="mt-3 mb-3">
         <b-card-group columns>
             <b-card v-for="movie in movies" :key="movie.id" text-variant="black" :header="movie.title"
-                :img-src="getMovieIMG(movie)" class="text-center">
+                :img-src="getMovieIMG(movie)" class="text-center" @click="accessMovie(movie.id)">
                 <b-card-text class="overview-text">
                     <div>
                         <b-icon-star class="star">
@@ -61,6 +61,9 @@ export default {
         getMovieIMG(movie) {
             return `http://image.tmdb.org/t/p/original${movie.poster_path}`
         },
+        accessMovie(id){
+            this.$router.push(`/movie/${id}`)
+        }
     },
     beforeMount(){
         this.getMovies()
