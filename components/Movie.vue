@@ -88,7 +88,6 @@ export default {
 
         },
         async getFavorites() {
-            // .where("user_id", "==", "7hy9K8Dn87WU8xzvJpKzYZgdN8C2")
             if (this.$fire.auth.currentUser.uid){
                 let user = await this.$fire.firestore
                     .collection("user")

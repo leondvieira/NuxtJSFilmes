@@ -29,7 +29,7 @@ export default {
         this.email,
         this.password
       ).then((data) => {
-        this.$router.replace({ name: 'secret' })
+        this.$router.replace({ name: 'favorites' })
       }).catch((error) => {
         this.error = error
       })

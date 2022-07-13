@@ -7,7 +7,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/secret">Secret</b-nav-item>
+          <b-nav-item to="/favorites">Favoritos</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-button squared style="background-color: #004166;" @click="search">Pesquisar

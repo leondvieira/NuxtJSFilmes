@@ -34,7 +34,7 @@ export default {
     props:{
         endpoint:{
             type: String,
-            required: true,
+            required: false,
         },
         filterBy: {
             type: Array,
@@ -47,15 +47,30 @@ export default {
         pagination:{
             type: Number,
             required: true,
+        },
+        movieIds:{
+            type: Array,
+            required: false
         }
     },
     methods: {
         async getMovies(){
-            if (this.endpoint != '' || this.endpoint != false){
-                let defaultParams = process.env.defaultParams
+            let defaultParams = process.env.defaultParams
+            if ((this.endpoint != '' || this.endpoint != false) && this.endpoint != undefined){ 
                 await this.$axios.$get(this.endpoint, { params: defaultParams }).then((response) => {
                     this.movies = response.results.slice(0, this.pagination)
-                })
+                })                
+
+            }else{
+                if(this.movieIds){
+                    for (const movie of this.movieIds) {
+                        await this.$axios.$get(`/movie/${movie}`, { params: defaultParams }).then((response) => {
+                            this.movies = [...this.movies, response]
+                        })
+                    }
+                }else{
+                    this.movies = []
+                }
             }
         },
         getMovieIMG(movie) {
