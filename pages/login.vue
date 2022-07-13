@@ -3,12 +3,14 @@
     <h3>Login</h3>
     <form @submit.prevent="login">
       <div class="login">
-        <input type="text" placeholder="login" v-model="email" />
+        <b-input type="text" placeholder="login" v-model="email">
+        </b-input>
       </div>
       <div class="password">
-        <input type="password" placeholder="password" v-model="password" />
+        <b-input type="password" placeholder="password" v-model="password">
+        </b-input>
       </div>
-      <button>Login</button>
+      <b-button @click="login" variant="primary">Login</b-button>
     </form>
     <div class="error" v-if="error">{{ error.message }}</div>
   </div>

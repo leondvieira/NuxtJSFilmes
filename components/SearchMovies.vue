@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         searchMovies(){
-            this.query = "/search/movie/?query=" + this.input
+            this.query = "/search/movie?query=" + this.input
         },
         clearInput(){
             this.query = '';
